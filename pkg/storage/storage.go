@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"log"
 	"sync"
-	//	_ "github.com/lib/pq"
+
+	_ "github.com/lib/pq"
 )
 
 var (
