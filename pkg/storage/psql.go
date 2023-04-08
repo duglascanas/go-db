@@ -16,7 +16,7 @@ const (
 		CONSTRAINT product_id_pk PRIMARY KEY (id)         
 	)`
 
-	psqlCreateInvoice = `CREATE TABLE IF NOT EXISTS invoices(
+	psqlCreateInvoiceHeader = `CREATE TABLE IF NOT EXISTS invoices(
 		id serial NOT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT now(),
 		updated_at TIMESTAMP,
@@ -63,19 +63,19 @@ func (p *PsqlProduct) Migrate() error {
 
 // ****************************************************************************
 // PsqlInvoice user for work with posgres
-type PsqlInvoice struct {
+type PsqlInvoiceHeader struct {
 	db *sql.DB
 }
 
 // NewPsqlInvoice return a new pointer of
-func NewPsqlInvoice(db *sql.DB) *PsqlInvoice {
-	return &PsqlInvoice{db}
+func NewPsqlInvoiceHeader(db *sql.DB) *PsqlInvoiceHeader {
+	return &PsqlInvoiceHeader{db}
 }
 
 // Migrate implement the interface invoice.Storage
-func (p *PsqlInvoice) Migrate() error {
+func (p *PsqlInvoiceHeader) Migrate() error {
 
-	stmt, err := p.db.Prepare(psqlCreateInvoice)
+	stmt, err := p.db.Prepare(psqlCreateInvoiceHeader)
 	if err != nil {
 		return err
 	}
@@ -87,7 +87,7 @@ func (p *PsqlInvoice) Migrate() error {
 		return err
 	}
 
-	fmt.Println("Migracion de INVOICE ejecutada correctamente")
+	fmt.Println("Migracion de INVOICEHeader ejecutada correctamente")
 	return nil
 }
 
@@ -97,7 +97,7 @@ type PsqlInvoiceItem struct {
 	db *sql.DB
 }
 
-// NewPsqlProduct return a new pointer of
+// NewPsqlInvoiceItem return a new pointer of
 func NewPsqlInvoiceItem(db *sql.DB) *PsqlInvoiceItem {
 	return &PsqlInvoiceItem{db}
 }

@@ -23,7 +23,7 @@ type Storage interface {
 	//Delete(uint) error
 }
 
-//Service of invoice
+//Service of invoiceheader
 type Service struct {
 	storage Storage
 }
@@ -33,7 +33,7 @@ func NewService(s Storage) *Service {
 	return &Service{s}
 }
 
-// Migrate is used for migrate invoice
+// Migrate is used for migrate invoiceheader
 func (s *Service) Migrate() error {
 	return s.storage.Migrate()
 }

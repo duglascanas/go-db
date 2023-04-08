@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/duglascanas/go-db/pkg/product"
+
 	"github.com/duglascanas/go-db/pkg/storage"
 )
 
@@ -17,11 +18,11 @@ func main() {
 		log.Fatalf("product.Migrate: %v", err)
 	}
 	//Invoice
-	storageInvoice := storage.NewPsqlInvoice(storage.Pool())
-	serviceInvoice := invoice.NewService(storageInvoice)
+	storageInvoiceHeader := storage.NewPsqlInvoiceHeader(storage.Pool())
+	serviceInvoiceHeader := invoiceHeader.NewService(storageInvoiceHeader)
 
-	if err := serviceInvoice.Migrate(); err != nil {
-		log.Fatalf("product.Migrate: %v", err)
+	if err := serviceInvoiceHeader.Migrate(); err != nil {
+		log.Fatalf("invoiceHeader.Migrate: %v", err)
 	}
 	//Invoice
 	storageInvoiceItem := storage.NewPsqlInvoiceItem(storage.Pool())
