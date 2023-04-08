@@ -13,7 +13,7 @@ var (
 	once sync.Once
 )
 
-func NewPostgresDB() {
+func ls() {
 	once.Do(func() {
 		var err error
 		db, err := sql.Open("postgres", "postgres://posgres:posgrest@localhost:5432/godb?sslmode=disable")
