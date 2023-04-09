@@ -16,19 +16,26 @@ const (
 		CONSTRAINT product_id_pk PRIMARY KEY (id)         
 	)`
 
-	psqlCreateInvoiceHeader = `CREATE TABLE IF NOT EXISTS invoices(
+	psqlCreateInvoiceHeader = `CREATE TABLE IF NOT EXISTS invoice_headers (
 		id serial NOT NULL,
+		client VARCHAR(100) NOT NULL,
 		created_at TIMESTAMP NOT NULL DEFAULT now(),
 		updated_at TIMESTAMP,
 		CONSTRAINT invoice_id_pk PRIMARY KEY(id)
 		)`
 
-	psqlCreateInvoiceItem = `CREATE TABLE IF NOT EXISTS invoiceitems(
+	psqlCreateInvoiceItem = `CREATE TABLE IF NOT EXISTS invoice_items(
 		id serial NOT NULL,
-		invoice_id INT NOT NULL,
+		invoice_header_id INT NOT NULL,
 		product_id INT NOT NULL,
+		created_at TIMESTAMP NOT NULL DEFAULT now(),
 		updated_at TIMESTAMP,
-		CONSTRAINT invoiceitem_id_pk PRIMARY KEY(id)
+		CONSTRAINT invoice_items_id_pk PRIMARY KEY(id),
+		CONSTRAINT invoice_items_invoice_header_id_fk FOREIGN KEY
+		(invoice_header_id) REFERENCES invoice_headers (id) ON UPDATE
+		RESTRICT ON DELETE RESTRICT,
+		CONSTRAINT invoice_items_product_id_fk FOREIGN KEY (product_id)
+		REFERENCES products (id) ON UPDATE RESTRICT ON DELETE RESTRICT
 		)`
 )
 
