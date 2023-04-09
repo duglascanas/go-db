@@ -25,8 +25,8 @@ const (
 
 	psqlCreateInvoiceItem = `CREATE TABLE IF NOT EXISTS invoiceitems(
 		id serial NOT NULL,
-		invoice_id NOT NULL,
-		product_id NOT NULL,
+		invoice_id INT NOT NULL,
+		product_id INT NOT NULL,
 		updated_at TIMESTAMP,
 		CONSTRAINT invoiceitem_id_pk PRIMARY KEY(id)
 		)`
@@ -87,7 +87,7 @@ func (p *PsqlInvoiceHeader) Migrate() error {
 		return err
 	}
 
-	fmt.Println("Migracion de INVOICEHeader ejecutada correctamente")
+	fmt.Println("Migracion de INVOICEHEADERS ejecutada correctamente")
 	return nil
 }
 
@@ -117,6 +117,6 @@ func (p *PsqlInvoiceItem) Migrate() error {
 		return err
 	}
 
-	fmt.Println("Migracion de INVOICEITEM ejecutada correctamente")
+	fmt.Println("Migracion de INVOICEITEMS ejecutada correctamente")
 	return nil
 }
