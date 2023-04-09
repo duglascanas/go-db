@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/duglascanas/go-db/pkg/product"
-
 	"github.com/duglascanas/go-db/pkg/storage"
 )
 
